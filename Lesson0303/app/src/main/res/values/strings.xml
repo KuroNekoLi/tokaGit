@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lesson0303</string>
+    <string name="text_defalt_name">hello %1$s </string>
+</resources>
