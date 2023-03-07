@@ -1,0 +1,114 @@
+1.安裝android studiohttps://developer.android.com/studio#:~:text=Windows%0A(64%2Dbit,7f08286effd7c426e36a5dd2d49979d9d461874ca4a6fffe87e0092619b68c98
+2.安裝wsl
+\\192.168.9.10\public\RHDAPPTEAMS\設定SOP\安裝windows版ubuntu.txt
+3.安裝android studio好後可以import coding style
+4.申請gitlab帳號(要找Richard)https://gitlab.tolka.com.tw/
+5.terminal可以到windows store安裝windows terminal   
+
+
+
+一.
+搜尋powershell(以系統管理員身分執行)
+輸入Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 點y並重新啟動
+
+下面這樣應該也可以
+(控制台->程式集->開啟或關閉windows功能-> windows子系統 Linux版)
+
+到microsoft store 搜尋wsl 安裝ubuntu 18
+
+二.
+//安裝指令 sudo apt-get install XXX  安裝下面兩個
+x11-apps(linux)
+dbus-x11(linux)
+
+三.
+建key
+ssh-keygen -t rsa
+(會提示把公key及私key生在.ssh/下面)
+一路按enter直到結束
+cd .ssh/
+cat 公key 
+貼內容到公司的project，這樣才有權限下載公司的project
+
+四.
+key 移完之後 關閉權限
+chmod 400 ~/.ssh/id_rsa
+
+五.
+//建一個連結連到這  並取名為tolkaGit
+ln -s /mnt/d/LinuxShared/tolkaGit/ tolkaGit
+ln -s /mnt/d/LinuxShared/aspirappsGit/ aspirappsGit
+
+//以後直接輸入cd tolkaGit即可直接連到此共享資料夾
+cd tolkaGit
+
+六.
+//將X11UseForwarding yes寫在X11Forwarding yes下面
+sudo nano /etc/ssh/sshd_config
+X11Forwarding yes
+X11UseForwarding yes
+
+七.
+echo "export DISPLAY=127.0.0.1:0" >> ~/.bashrc
+//建議再跑一次這個export DISPLAY=127.0.0.1:0
+
+八.
+在web網路https://sourceforge.net/projects/vcxsrv/ 按下載
+安裝後 找xlaunch然後一直按下一步
+
+在wsl版ubuntu輸入xeyes
+出現眼睛就ok
+
+九.
+
+//先update再裝meld
+sudo apt-get update
+
+//再裝meld
+sudo apt-get install meld
+
+十.
+
+//我的位置
+cd /mnt/d/linuxShared/tolkaGit
+
+十一.設取名 (在跟目錄下) / Git 命令別名
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global user.email "may.chen@tolka.tv"
+git config --global user.name "may.chen"
+
+(根目錄下)
+sudo vi git-meld.sh
+
+//按i，貼上下面這串
+#!/bin/sh
+meld $2 $5
+
+//存檔，退出(esc -> 打 ":wq!" )
+//再輸入
+sudo chmod 777 git-meld.sh
+git config --global diff.external ~/git-meld.sh
+======================================================
+★其他
+wsl gnome
+
+git config --global alias 
+======================================================
+//解決中文是亂碼的問題，輸入:
+sudo ln -s /mnt/c/Windows/Fonts/ /usr/share/fonts/
+=======================================================
+//讓git st 正確顯示中文路徑
+git config --global core.quotepath false
+=======================================================
+=======================================================
+//vpn
+//先用cmd 用nslookup語法 查ip
+sudo nano /etc/hosts
+加上
+61.216.145.152  gitlab.tolka.com.tw即可
+
+=======================================================
