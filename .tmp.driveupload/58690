@@ -1,0 +1,5 @@
+package com.example.self_determine_view;
+
+public class MyView extends View{
+    
+}

@@ -1,0 +1,25 @@
+package com.example.self_determine_view;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+
+public class MyView extends View {
+    public MyView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+
+        setBackgroundColor(Color.GREEN);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        canvas.drawCircle(0,0,40,);
+    }
+}
+

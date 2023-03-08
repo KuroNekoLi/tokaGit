@@ -1,0 +1,55 @@
+package com.example.circular_mission;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MainActivity extends AppCompatActivity {
+    private Timer timer;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void test1(View view) {
+        Log.d("LinLi", "start: ");
+        timer.schedule(new Task1(),3*1000);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        timer = new Timer();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(timer != null){
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+    }
+
+    public void test2(View view) {
+    }
+
+    public void test3(View view) {
+    }
+
+    private class Task1 extends TimerTask{
+        @Override
+        public void run() {
+
+            Log.d("LinLi", "run: ");
+        }
+    }
+}
